@@ -4,7 +4,7 @@
 
 #include "Bug.h"
 
-bool Bug::isWayBlocked() {
+bool Bug::isWayBlocked() const {
         {
                 if (position.first==0 && direction_==west) {
                         return true;

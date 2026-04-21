@@ -27,6 +27,6 @@ protected:
         bool alive {true};
         list<pair<int, int>> path;
         virtual void move()= 0;
-        bool isWayBlocked();
+        bool isWayBlocked() const;
 };
 #endif //A_BUGS_LIFE_BUG_H

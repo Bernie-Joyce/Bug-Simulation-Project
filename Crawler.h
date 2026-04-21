@@ -8,6 +8,7 @@
 
 
 class Crawler : public Bug {
+public:
         void move() override;
 };
 
