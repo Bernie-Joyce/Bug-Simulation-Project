@@ -7,10 +7,8 @@
 #include "Bug.h"
 
 
-class Crawler : Bug{
-        void move() {
-
-        }
+class Crawler : public Bug {
+        void move() override;
 };
 
 

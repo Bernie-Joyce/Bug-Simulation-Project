@@ -16,6 +16,9 @@ enum Direction {
 };
 
 class Bug {
+public:
+        virtual ~Bug() = default;
+
 protected:
         int id {};
         pair<int,int> position;
@@ -23,21 +26,7 @@ protected:
         int health {};
         bool alive {true};
         list<pair<int, int>> path;
-        virtual void move() {}
-        bool isWayBlocked() {
-                if (position.first==0 && direction_==west) {
-                        return true;
-                }
-                if (position.first==9 && direction_==east){
-                        return true;
-                }
-                if (position.second==0 && direction_==south) {
-                        return true;
-                }
-                if (position.second==9 && direction_==north) {
-                        return true;
-                }
-                return false;
-        }
+        virtual void move()= 0;
+        bool isWayBlocked();
 };
 #endif //A_BUGS_LIFE_BUG_H
