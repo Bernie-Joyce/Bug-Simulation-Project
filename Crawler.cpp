@@ -4,6 +4,8 @@
 
 #include "Crawler.h"
 
+#include <iostream>
+
 void Crawler::move() {
         {
                 if (isWayBlocked()) {
@@ -11,7 +13,7 @@ void Crawler::move() {
                         while (wayIsBlocked) {
                                 direction_ = static_cast<Direction>(rand() % 4);
                                 if (!isWayBlocked()) {
-                                        wayIsBlocked=false;
+                                        wayIsBlocked = false;
                                 }
                         }
                 } else {
@@ -30,4 +32,21 @@ void Crawler::move() {
                         path.push_back(position);
                 }
         }
+}
+
+Crawler::Crawler(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health) {
+        if (x_Coordinate < 0 || x_Coordinate > 9) {
+                throw std::invalid_argument("x_Coordinate must be between 0 and 9");
+        }
+        if (y_Coordinate < 0 || y_Coordinate > 9) {
+                throw std::invalid_argument("Y_Coordinate must be between 0 and 9");
+        }
+        if (health < 1 || health > 20) {
+                throw std::invalid_argument("Health must between 1 and 20");
+        }
+        this->id = id;
+        this->position.first = x_Coordinate;
+        this->position.second = y_Coordinate;
+        this->direction_ = direction;
+        this->health = health;
 }

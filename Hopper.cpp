@@ -16,19 +16,19 @@ void Hopper::move() {
         } else {
                 if (direction_ == west) {
                         position.first = position.first - hopLength;
-                        position.first = (position.first<0) ? 0 : position.first;
+                        position.first = (position.first < 0) ? 0 : position.first;
                 }
                 if (direction_ == east) {
                         position.first = position.first + hopLength;
-                        position.first = (position.first>9) ? 9 : position.first;
+                        position.first = (position.first > 9) ? 9 : position.first;
                 }
                 if (direction_ == south) {
                         position.second = position.second - hopLength;
-                        position.second = (position.second<0) ? 0 : position.second;
+                        position.second = (position.second < 0) ? 0 : position.second;
                 }
                 if (direction_ == north) {
                         position.second = position.second + hopLength;
-                        position.second = (position.second>9) ? 9 : position.second;
+                        position.second = (position.second > 9) ? 9 : position.second;
                 }
                 path.push_back(position);
         }

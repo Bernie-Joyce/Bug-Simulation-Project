@@ -1,6 +1,6 @@
-#include <iostream>
+#include "Bug.h"
 
 int main() {
-        std::cout << "Hello, World!" << std::endl;
+        vector<Bug*> bug_vector;
         return 0;
 }
