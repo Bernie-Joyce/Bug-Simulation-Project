@@ -6,6 +6,15 @@
 
 #include <iostream>
 
+void Crawler::display() {
+        const vector<string> directions = {"north", "south", "east", "west"};
+
+        cout << "Crawler:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) << ","
+                        << to_string(position.second) << "\nDirection: " << directions[direction_]
+                        << "\nHealth: " << to_string(health)
+                        << "\nAlive: " << to_string(alive);
+}
+
 void Crawler::move() {
         {
                 if (isWayBlocked()) {
@@ -34,7 +43,8 @@ void Crawler::move() {
         }
 }
 
-Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction, const int health) {
+Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction,
+                 const int health) {
         if (x_Coordinate < 0 || x_Coordinate > 9) {
                 throw std::invalid_argument("x_Coordinate must be between 0 and 9");
         }

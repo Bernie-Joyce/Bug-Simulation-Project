@@ -18,7 +18,7 @@ enum Direction {
 class Bug {
 public:
         virtual ~Bug() = default;
-
+        virtual void display()=0;
 protected:
         int id {};
         pair<int,int> position;
@@ -28,5 +28,6 @@ protected:
         list<pair<int, int>> path;
         virtual void move()= 0;
         bool isWayBlocked() const;
+
 };
 #endif //A_BUGS_LIFE_BUG_H

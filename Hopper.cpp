@@ -4,6 +4,8 @@
 
 #include "Hopper.h"
 
+#include <iostream>
+
 void Hopper::move() {
         if (isWayBlocked()) {
                 bool wayIsBlocked = true;
@@ -32,6 +34,16 @@ void Hopper::move() {
                 }
                 path.push_back(position);
         }
+}
+
+void Hopper::display() {
+
+        const vector<string> directions = {"north", "south", "east", "west"};
+        cout << "Hopper:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) << ","
+                        << to_string(position.second) << "\nDirection: " << directions[direction_]
+                        << "\nHealth: " << to_string(health)
+                        << "\nAlive: " << to_string(alive)
+                        << "\nHop Length: " << to_string(hopLength);
 }
 
 Hopper::Hopper(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health, int hopLength) {
