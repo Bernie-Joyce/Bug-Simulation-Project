@@ -34,7 +34,7 @@ void Crawler::move() {
         }
 }
 
-Crawler::Crawler(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health) {
+Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction, const int health) {
         if (x_Coordinate < 0 || x_Coordinate > 9) {
                 throw std::invalid_argument("x_Coordinate must be between 0 and 9");
         }

@@ -33,3 +33,24 @@ void Hopper::move() {
                 path.push_back(position);
         }
 }
+
+Hopper::Hopper(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health, int hopLength) {
+        if (x_Coordinate < 0 || x_Coordinate > 9) {
+                throw std::invalid_argument("x_Coordinate must be between 0 and 9");
+        }
+        if (y_Coordinate < 0 || y_Coordinate > 9) {
+                throw std::invalid_argument("Y_Coordinate must be between 0 and 9");
+        }
+        if (health < 1 || health > 20) {
+                throw std::invalid_argument("Health must between 1 and 20");
+        }
+        if (hopLength < 2 || hopLength > 4) {
+                throw std::invalid_argument("Hop length must be between 2 and 4");
+        }
+        this->id = id;
+        this->position.first = x_Coordinate;
+        this->position.second = y_Coordinate;
+        this->direction_ = direction;
+        this->health = health;
+        this->hopLength = hopLength;
+}
