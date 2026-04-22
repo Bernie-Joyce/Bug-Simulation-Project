@@ -5,8 +5,6 @@
 
 int main() {
         vector<Bug *> bug_vector;
-
-
         cout << "1. Initialize Bug Board (load data from file)" << endl;
         cout << "2. Display all Bugs" << endl;
         cout << "3. Find a Bug (given an id)" << endl;
@@ -20,31 +18,47 @@ int main() {
 
         int commandNumber = stoi(command);
 
-        switch (commandNumber) {
-                case 1: FileReader::load("bugs.txt", bug_vector);
-                        break;
-                case 2: for (Bug *bug: bug_vector) {
-                                bug->display();
-                                cout << endl;
-                        }
-                        break;
-                case 3:
-                        cout << "Input bug id" << endl;
-                        string bugId;
-                        getline(cin, bugId);
-                        int bugIdNum = stoi(bugId);
-                        bool found = false;
-                        for (Bug *bug: bug_vector) {
-                                if (bug->getId() == bugIdNum) {
+        while (commandNumber != 0) {
+                switch (commandNumber) {
+                        case 1: FileReader::load("bugs.txt", bug_vector);
+                                break;
+                        case 2: for (Bug *bug: bug_vector) {
                                         bug->display();
                                         cout << endl;
-                                        found = true;
                                 }
+                                break;
+                        case 3: {
+                                cout << "Input bug id" << endl;
+                                string bugId;
+                                cin.ignore();
+                                getline(cin, bugId);
+                                const int bugIdNum = stoi(bugId);
+                                bool found = false;
+                                for (Bug *bug: bug_vector) {
+                                        if (bug->getId() == bugIdNum) {
+                                                bug->display();
+                                                cout << endl;
+                                                found = true;
+                                        }
+                                }
+                                if (!found) {
+                                        cout << "bug not found" << endl;
+                                }
+                                break;
                         }
-                        if (!found) {
-                                cout << "bug not found" << endl;
-                        }
-                        break;
+
+                        case 4:
+                                for (Bug *bug: bug_vector) {
+                                        bug->move();
+                                }
+                                break;
+                        default: cout << "Invalid command" << endl;
+                }
+                        cout << "Enter a new command: ";
+                        getline(cin, command);
+                        commandNumber = stoi(command);
+
+
         }
 
         for (const Bug *bug: bug_vector) {
