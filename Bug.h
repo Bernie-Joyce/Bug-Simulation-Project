@@ -27,9 +27,11 @@ class Bug {
 public:
         virtual ~Bug() = default;
 
-        virtual void display() =0;
+        virtual void display();
 
         virtual void move() = 0;
+
+        Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
 
 protected:
         int id{};
@@ -38,7 +40,6 @@ protected:
         int health{};
         bool alive{true};
         list<pair<int, int> > path;
-
         [[nodiscard]] bool isWayBlocked() const;
 };
 #endif //A_BUGS_LIFE_BUG_H
