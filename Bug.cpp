@@ -8,16 +8,16 @@
 
 bool Bug::isWayBlocked() const {
         {
-                if (position.first==0 && direction_==west) {
+                if (position.first == 0 && direction_ == west) {
                         return true;
                 }
-                if (position.first==9 && direction_==east){
+                if (position.first == 9 && direction_ == east) {
                         return true;
                 }
-                if (position.second==0 && direction_==south) {
+                if (position.second == 0 && direction_ == south) {
                         return true;
                 }
-                if (position.second==9 && direction_==north) {
+                if (position.second == 9 && direction_ == north) {
                         return true;
                 }
                 return false;
@@ -42,12 +42,18 @@ Bug::Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int he
         this->health = health;
 }
 
-void Bug::display() {
-        const vector<string> directionsList = {"north", "south", "east", "west"};
+int Bug::getId() const {
+        return this->id;
+}
 
-        cout << std::boolalpha << "\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) <<
-                        ","
-                        << to_string(position.second) << "\nDirection: " << directionsList[direction_]
-                        << "\nHealth: " << to_string(health)
-                        << "\nAlive: " << alive;
+void Bug::display() {
+        const vector<string> directionsList = {"North", "South", "East", "West"};
+        string alive_str = alive ? "Alive" : "Dead";
+
+        cout << " " << to_string(id) << " "
+                        << " (" << to_string(position.first) << "," << to_string(position.second) << ") "
+                        << to_string(health) <<
+                        " " <<
+                        directionsList[direction_]
+                        << " " << alive_str;
 }

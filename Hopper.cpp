@@ -31,12 +31,24 @@ void Hopper::move() {
 }
 
 void Hopper::display() {
-        cout << "Hopper:";
+        cout << "Hopper: ";
         Bug::display();
-        cout << "\nHop Length: " << to_string(hopLength);
+        cout << " " << to_string(hopLength);
 }
 
-Hopper::Hopper(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction, const int health, const int hopLength) : Bug(
+void Hopper::displayLifeHistory() {
+        cout << to_string(id) << " Hopper Path:";
+        for (pair position: path) {
+                cout << "(" << position.first << "," << position.second << ")";
+        }
+        string alive_str = alive ? "Alive" : "Dead";
+
+        cout << "," << alive_str;
+}
+
+
+Hopper::Hopper(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction,
+               const int health, const int hopLength) : Bug(
         id, x_Coordinate, y_Coordinate, direction, health) {
         if (hopLength < 2 || hopLength > 4) {
                 throw std::invalid_argument("Hop length must be between 2 and 4");

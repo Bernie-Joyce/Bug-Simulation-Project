@@ -1,9 +1,4 @@
-//
-// Created by Bernie Joyce on 21/04/2026.
-//
-
 #include "Crawler.h"
-
 #include <iostream>
 
 void Crawler::display() {
@@ -34,4 +29,14 @@ void Crawler::move() {
 
 Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction,
                  const int health) : Bug(id, x_Coordinate, y_Coordinate, direction, health) {
+}
+
+void Crawler::displayLifeHistory() {
+        cout << to_string(id) << " Crawler Path:";
+        for (pair position: path) {
+                cout << "(" << position.first << "," << position.second << ")";
+        }
+        string alive_str = alive ? "Alive" : "Dead";
+
+        cout << "," << alive_str;
 }
