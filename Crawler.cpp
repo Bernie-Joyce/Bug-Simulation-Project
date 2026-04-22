@@ -4,8 +4,11 @@
 
 #include "Crawler.h"
 
+#include <iostream>
+
 void Crawler::display() {
-       Bug::display();
+        cout << "Crawler:";
+        Bug::display();
 }
 
 void Crawler::move() {
