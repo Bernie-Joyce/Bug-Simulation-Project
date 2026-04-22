@@ -36,6 +36,17 @@ void Hopper::display() {
         cout << " " << to_string(hopLength);
 }
 
+void Hopper::displayLifeHistory() {
+        cout << to_string(id) << " Hopper Path:";
+        for (pair position: path) {
+                cout << "(" << position.first << "," << position.second << ")";
+        }
+        string alive_str = alive ? "Alive" : "Dead";
+
+        cout << "," << alive_str;
+}
+
+
 Hopper::Hopper(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction,
                const int health, const int hopLength) : Bug(
         id, x_Coordinate, y_Coordinate, direction, health) {

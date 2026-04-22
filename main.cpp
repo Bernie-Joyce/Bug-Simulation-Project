@@ -23,7 +23,7 @@ int main() {
                 getline(cin, command);
                 try {
                         commandNumber = stoi(command);
-                } catch (const std::exception&) {
+                } catch (const std::exception &) {
                         cout << "Please enter a valid number." << endl;
                         continue;
                 }
@@ -45,6 +45,10 @@ int main() {
                                 break;
                         case 3: {
                                 try {
+                                        if (bug_vector.empty()) {
+                                                cout << "No bugs loaded!" << endl;
+                                                continue;
+                                        }
                                         cout << "Input bug id" << endl;
                                         string bugId;
                                         getline(cin, bugId);
@@ -60,9 +64,8 @@ int main() {
                                         if (!found) {
                                                 cout << "bug not found" << endl;
                                         }
-                                }
-                                catch (const std::exception&) {
-                                        cout << "Invalid Id" << endl;
+                                } catch (const std::exception &) {
+                                        cout << "Invalid ID" << endl;
                                 }
                                 break;
                         }
@@ -70,6 +73,17 @@ int main() {
                                 for (Bug *bug: bug_vector) {
                                         bug->move();
                                 }
+                                break;
+                        case 5: for (Bug *bug: bug_vector) {
+                                        bug->displayLifeHistory();
+                                        cout << endl;
+                                }
+                                break;
+                        case 6:
+                                cout << "Display all cells";
+                                break;
+                        case 7:
+                                cout << "Run simulation";
                                 break;
                         case 8:
                                 cout << "Program over";
