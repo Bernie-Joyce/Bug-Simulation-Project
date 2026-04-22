@@ -4,12 +4,7 @@
 #include "FileReader.h"
 
 int main() {
-        vector<Bug*> bug_vector;
-        FileReader::load("bugs.txt",bug_vector);
-        for (Bug* bug: bug_vector) {
-                bug->display();
-                cout << endl;
-        }
+        vector<Bug *> bug_vector;
 
 
         cout << "1. Initialize Bug Board (load data from file)" << endl;
@@ -21,10 +16,39 @@ int main() {
         cout << "7. Run simulation (generates a Tap every second)" << endl;
         cout << "8. Exit (write Life History of all Bugs to file)" << endl;
         string command;
-        getline(cin,command);
+        getline(cin, command);
 
-        for (const Bug* bug: bug_vector) {
-               delete bug;
+        int commandNumber = stoi(command);
+
+        switch (commandNumber) {
+                case 1: FileReader::load("bugs.txt", bug_vector);
+                        break;
+                case 2: for (Bug *bug: bug_vector) {
+                                bug->display();
+                                cout << endl;
+                        }
+                        break;
+                case 3:
+                        cout << "Input bug id" << endl;
+                        string bugId;
+                        getline(cin, bugId);
+                        int bugIdNum = stoi(bugId);
+                        bool found = false;
+                        for (Bug *bug: bug_vector) {
+                                if (bug->getId() == bugIdNum) {
+                                        bug->display();
+                                        cout << endl;
+                                        found = true;
+                                }
+                        }
+                        if (!found) {
+                                cout << "bug not found" << endl;
+                        }
+                        break;
+        }
+
+        for (const Bug *bug: bug_vector) {
+                delete bug;
         }
         bug_vector.clear();
         return 0;

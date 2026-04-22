@@ -42,6 +42,10 @@ Bug::Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int he
         this->health = health;
 }
 
+int Bug::getId() const {
+        return this->id;
+}
+
 void Bug::display() {
         const vector<string> directionsList = {"North", "South", "East", "West"};
         string alive_str = alive ? "Alive" : "Dead";

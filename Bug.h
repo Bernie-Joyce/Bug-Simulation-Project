@@ -31,6 +31,8 @@ public:
 
         virtual void move() = 0;
 
+        [[nodiscard]] int getId() const;
+
         Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
 
 protected:
