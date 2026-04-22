@@ -35,10 +35,10 @@ void Crawler::move() {
                                 position.first = position.first + 1;
                         }
                         if (direction_ == south) {
-                                position.second = position.second - 1;
+                                position.second = position.second + 1;
                         }
                         if (direction_ == north) {
-                                position.second = position.second + 1;
+                                position.second = position.second - 1;
                         }
                         path.push_back(position);
                 }

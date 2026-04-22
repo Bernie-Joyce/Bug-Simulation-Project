@@ -7,11 +7,7 @@
 #include <iostream>
 
 
-
-
 void Hopper::move() {
-
-
         while (isWayBlocked()) {
                 bool wayIsBlocked = true;
                 while (wayIsBlocked) {
@@ -21,24 +17,24 @@ void Hopper::move() {
                         }
                 }
         }
-                if (direction_ == west) {
-                        position.first = position.first - hopLength;
-                        position.first = position.first < 0 ? 0 : position.first;
-                }
-                if (direction_ == east) {
-                        position.first = position.first + hopLength;
-                        position.first = position.first > 9 ? 9 : position.first;
-                }
-                if (direction_ == south) {
-                        position.second = position.second + hopLength;
-                        position.second = position.second > 9 ? 9 : position.second;
-                }
-                if (direction_ == north) {
-                        position.second = position.second - hopLength;
-                        position.second = position.second > 0 ? 0 : position.second;
-                }
-                path.push_back(position);
+        if (direction_ == west) {
+                position.first = position.first - hopLength;
+                position.first = position.first < 0 ? 0 : position.first;
         }
+        if (direction_ == east) {
+                position.first = position.first + hopLength;
+                position.first = position.first > 9 ? 9 : position.first;
+        }
+        if (direction_ == south) {
+                position.second = position.second + hopLength;
+                position.second = position.second > 9 ? 9 : position.second;
+        }
+        if (direction_ == north) {
+                position.second = position.second - hopLength;
+                position.second = position.second > 0 ? 0 : position.second;
+        }
+        path.push_back(position);
+}
 
 void Hopper::display() {
         const vector<string> directionsList = {"north", "south", "east", "west"};
