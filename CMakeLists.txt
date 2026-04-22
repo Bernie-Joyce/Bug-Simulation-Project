@@ -11,4 +11,6 @@ add_executable(A_Bugs_Life main.cpp
         Hopper.h
         Hopper.cpp
         FileReader.h
-        FileReader.cpp)
+        FileReader.cpp
+        Board.h
+        Board.cpp)
