@@ -37,12 +37,11 @@ void Hopper::move() {
 }
 
 void Hopper::display() {
-
         const vector<string> directions = {"north", "south", "east", "west"};
-        cout << "Hopper:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) << ","
+        cout <<std::boolalpha << "Hopper:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) << ","
                         << to_string(position.second) << "\nDirection: " << directions[direction_]
                         << "\nHealth: " << to_string(health)
-                        << "\nAlive: " << to_string(alive)
+                        << "\nAlive: " << alive
                         << "\nHop Length: " << to_string(hopLength);
 }
 
