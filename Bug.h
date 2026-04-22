@@ -39,6 +39,6 @@ protected:
         bool alive{true};
         list<pair<int, int> > path;
 
-        bool isWayBlocked() const;
+        [[nodiscard]] bool isWayBlocked() const;
 };
 #endif //A_BUGS_LIFE_BUG_H

@@ -8,11 +8,11 @@
 
 
 void Crawler::display() {
-        const vector<string> directions = {"north", "south", "east", "west"};
+        const vector<string> directionsList = {"north", "south", "east", "west"};
 
         cout << std::boolalpha << "Crawler:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) <<
                         ","
-                        << to_string(position.second) << "\nDirection: " << directions[direction_]
+                        << to_string(position.second) << "\nDirection: " << directionsList[direction_]
                         << "\nHealth: " << to_string(health)
                         << "\nAlive: " << to_string(alive);
 }
