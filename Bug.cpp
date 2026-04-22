@@ -45,9 +45,9 @@ Bug::Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int he
 void Bug::display() {
         const vector<string> directionsList = {"north", "south", "east", "west"};
 
-        cout << std::boolalpha << "Crawler:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) <<
+        cout << std::boolalpha << "\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) <<
                         ","
                         << to_string(position.second) << "\nDirection: " << directionsList[direction_]
                         << "\nHealth: " << to_string(health)
-                        << "\nAlive: " << to_string(alive);
+                        << "\nAlive: " << alive;
 }
