@@ -6,6 +6,7 @@
 #define A_BUGS_LIFE_BUG_H
 #include <list>
 #include <utility>
+#include <random>
 using namespace std;
 
 enum Direction {
@@ -15,17 +16,29 @@ enum Direction {
         west,
 };
 
-class Bug {
-protected:
-        int id {};
-        pair<int,int> position;
-        Direction direction_ {};
-        int health {};
-        bool alive {true};
-        list<pair<int, int>> path;
-        virtual void move() {}
-        bool isWayBlocked() {}
+inline std::mt19937 mt{
+        static_cast<std::mt19937::result_type>(
+                std::chrono::steady_clock::now().time_since_epoch().count()
+        )
 };
+inline std::uniform_int_distribution directions{0, 3};
 
+class Bug {
+public:
+        virtual ~Bug() = default;
 
+        virtual void display() =0;
+
+        virtual void move() = 0;
+
+protected:
+        int id{};
+        pair<int, int> position;
+        Direction direction_{};
+        int health{};
+        bool alive{true};
+        list<pair<int, int> > path;
+
+        [[nodiscard]] bool isWayBlocked() const;
+};
 #endif //A_BUGS_LIFE_BUG_H
