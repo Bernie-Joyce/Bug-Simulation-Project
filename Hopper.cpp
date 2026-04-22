@@ -5,40 +5,49 @@
 #include "Hopper.h"
 
 #include <iostream>
+#include <random>
+
+std::mt19937 mt{
+        static_cast<std::mt19937::result_type>(
+                std::chrono::steady_clock::now().time_since_epoch().count()
+        )
+};
+std::uniform_int_distribution directions{0, 3};
 
 void Hopper::move() {
-        if (isWayBlocked()) {
+
+
+        while (isWayBlocked()) {
                 bool wayIsBlocked = true;
                 while (wayIsBlocked) {
-                        direction_ = static_cast<Direction>(rand() % 4);
+                        direction_ = static_cast<Direction>(directions(mt));
                         if (!isWayBlocked()) {
                                 wayIsBlocked = false;
                         }
                 }
-        } else {
+        }
                 if (direction_ == west) {
                         position.first = position.first - hopLength;
-                        position.first = (position.first < 0) ? 0 : position.first;
+                        position.first = position.first < 0 ? 0 : position.first;
                 }
                 if (direction_ == east) {
                         position.first = position.first + hopLength;
-                        position.first = (position.first > 9) ? 9 : position.first;
+                        position.first = position.first > 9 ? 9 : position.first;
                 }
                 if (direction_ == south) {
-                        position.second = position.second - hopLength;
-                        position.second = (position.second < 0) ? 0 : position.second;
+                        position.second = position.second + hopLength;
+                        position.second = position.second > 9 ? 9 : position.second;
                 }
                 if (direction_ == north) {
-                        position.second = position.second + hopLength;
-                        position.second = (position.second > 9) ? 9 : position.second;
+                        position.second = position.second - hopLength;
+                        position.second = position.second > 0 ? 0 : position.second;
                 }
                 path.push_back(position);
         }
-}
 
 void Hopper::display() {
         const vector<string> directions = {"north", "south", "east", "west"};
-        cout <<std::boolalpha << "Hopper:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) << ","
+        cout << std::boolalpha << "Hopper:\nID: " << to_string(id) << "\nPosition: " << to_string(position.first) << ","
                         << to_string(position.second) << "\nDirection: " << directions[direction_]
                         << "\nHealth: " << to_string(health)
                         << "\nAlive: " << alive

@@ -5,6 +5,7 @@
 #include "Crawler.h"
 
 #include <iostream>
+#include "Hopper.cpp"
 
 void Crawler::display() {
         const vector<string> directions = {"north", "south", "east", "west"};
@@ -21,7 +22,7 @@ void Crawler::move() {
                 if (isWayBlocked()) {
                         bool wayIsBlocked = true;
                         while (wayIsBlocked) {
-                                direction_ = static_cast<Direction>(rand() % 4);
+                                direction_ = static_cast<Direction>(directions(mt));
                                 if (!isWayBlocked()) {
                                         wayIsBlocked = false;
                                 }
