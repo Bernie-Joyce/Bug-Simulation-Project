@@ -5,14 +5,9 @@
 #include "Hopper.h"
 
 #include <iostream>
-#include <random>
 
-std::mt19937 mt{
-        static_cast<std::mt19937::result_type>(
-                std::chrono::steady_clock::now().time_since_epoch().count()
-        )
-};
-std::uniform_int_distribution directions{0, 3};
+
+
 
 void Hopper::move() {
 

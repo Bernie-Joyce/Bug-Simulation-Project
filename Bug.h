@@ -6,6 +6,7 @@
 #define A_BUGS_LIFE_BUG_H
 #include <list>
 #include <utility>
+#include <random>
 using namespace std;
 
 enum Direction {
@@ -14,6 +15,13 @@ enum Direction {
         east,
         west,
 };
+
+inline std::mt19937 mt{
+        static_cast<std::mt19937::result_type>(
+                std::chrono::steady_clock::now().time_since_epoch().count()
+        )
+};
+inline std::uniform_int_distribution directions{0, 3};
 
 class Bug {
 public:

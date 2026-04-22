@@ -5,7 +5,7 @@
 #include "Crawler.h"
 
 #include <iostream>
-#include "Hopper.cpp"
+
 
 void Crawler::display() {
         const vector<string> directions = {"north", "south", "east", "west"};
