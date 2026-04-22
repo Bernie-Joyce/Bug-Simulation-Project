@@ -10,16 +10,6 @@ int main() {
                 bug->display();
                 cout << endl;
         }
-
-        for (Bug* bug: bug_vector) {
-                bug->move();
-                cout << endl;
-        }
-        for (Bug* bug: bug_vector) {
-                bug->display();
-                cout << endl;
-        }
-
         for (const Bug* bug: bug_vector) {
                delete bug;
         }

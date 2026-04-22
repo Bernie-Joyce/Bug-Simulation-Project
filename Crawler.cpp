@@ -1,9 +1,4 @@
-//
-// Created by Bernie Joyce on 21/04/2026.
-//
-
 #include "Crawler.h"
-
 #include <iostream>
 
 void Crawler::display() {
@@ -33,5 +28,4 @@ void Crawler::move() {
 }
 
 Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction,
-                 const int health) : Bug(id, x_Coordinate, y_Coordinate, direction, health) {
-}
+                 const int health) : Bug(id, x_Coordinate, y_Coordinate, direction, health) {}
