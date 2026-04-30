@@ -5,7 +5,7 @@
 #include "Bug.h"
 
 int main() {
-        Board board;
+        Board board = Board{};
         Board::printMenuOptions();
         int commandNumber = 0;
         while (commandNumber != 8) {
@@ -34,7 +34,7 @@ int main() {
                         case 5: board.displayAllBugsLifeHistory();
                                 break;
                         case 6:
-                                cout << "\nDisplay all cells";
+                                board.displayBoardCells();
                                 break;
                         case 7:
                                 cout << "\nRun simulation";

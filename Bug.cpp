@@ -46,6 +46,15 @@ int Bug::getId() const {
         return this->id;
 }
 
+pair<int, int> Bug::getPosition() const {
+        return this->position;
+}
+
+void Bug::displayTypeAndID() {
+        cout << ": " << id;
+}
+
+
 void Bug::display() {
         const vector<string> directionsList = {"North", "South", "East", "West"};
         string alive_str = alive ? "Alive" : "Dead";

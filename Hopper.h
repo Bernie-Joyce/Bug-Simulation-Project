@@ -14,6 +14,7 @@ public:
         Hopper(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health, int hopLength);
         void display() override;
         void displayLifeHistory() override;
+        void displayTypeAndID() override;
 };
 
 

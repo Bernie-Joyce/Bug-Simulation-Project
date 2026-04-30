@@ -21,10 +21,25 @@ void Board::load(const std::string &fileName) {
                                 }
                         }
                         fin.close();
+                        fillBoardCells();
                         cout << "Bugs Loaded: " << bug_vector.size() << endl;
                 } else {
                         cout << "Error opening file." << endl;
                 }
+        }
+}
+
+Board::Board() {
+        this->boardCells.resize(10 * 10);
+}
+
+void Board::fillBoardCells() {
+        for (int i = 0; i < bug_vector.size(); i++) {
+                int width = 10;
+                Bug *bug = bug_vector[i];
+                pair position = bug->getPosition();
+                vector<Bug *> &cell = boardCells[position.first + (position.second * width)];
+                cell.push_back(bug);
         }
 }
 
@@ -50,6 +65,29 @@ void Board::getBugByID() const {
         }
 }
 
+void Board::displayBoardCells() const {
+        int length = 10;
+        int width = 10;
+        for (int x = 0; x < width; x++) {
+                for (int y = 0; y < length; y++) {
+                        vector<Bug *> cell = boardCells[x + (y * width)];
+                        cout << "(" << x << "," << y << "): ";
+                        if (cell.empty()) {
+                                cout << "empty";
+                        } else {
+                                for (int i = 0; i < cell.size(); i++) {
+                                        Bug *bug = cell[i];
+                                        bug->displayTypeAndID();
+                                        if (cell.size() > 1 && i < cell.size() - 1) {
+                                                cout << ",";
+                                        }
+                                }
+                        }
+                        cout << endl;
+                }
+        }
+}
+
 void Board::displayAllBugs() const {
         if (bug_vector.empty()) cout << "No bugs loaded!" << endl;
         for (Bug *bug: bug_vector) {
@@ -70,7 +108,6 @@ void Board::displayAllBugsLifeHistory() const {
                 bug->displayLifeHistory();
                 cout << endl;
         }
-
 }
 
 void Board::deleteBugPointers() {

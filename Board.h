@@ -13,11 +13,16 @@ class Board {
         vector<Bug *> bug_vector;
         vector<vector<Bug *> > boardCells;
         static void parseLine(const string &line, Bug * &bug);
+        void fillBoardCells();
 
 public:
         void load(const std::string &fileName);
 
+        Board ();
+
         void getBugByID() const;
+
+        void displayBoardCells() const;
 
         void displayAllBugs() const;
 
