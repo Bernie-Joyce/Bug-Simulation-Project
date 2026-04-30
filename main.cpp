@@ -3,7 +3,6 @@
 
 #include "Board.h"
 #include "Bug.h"
-#include "FileReader.h"
 
 int main() {
         Board board;
@@ -27,7 +26,7 @@ int main() {
                         case 3: try {
                                         board.getBugByID();
                                 } catch (const std::exception &) {
-                                        cout << "Invalid ID" << endl;
+                                        cout << "Bug not found" << endl;
                                 }
                                 break;
                         case 4: board.tap();
