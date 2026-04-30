@@ -34,9 +34,8 @@ Board::Board() {
 }
 
 void Board::fillBoardCells() {
-        for (int i = 0; i < bug_vector.size(); i++) {
-                int width = 10;
-                Bug *bug = bug_vector[i];
+        for (auto bug: bug_vector) {
+                constexpr int width = 10;
                 pair position = bug->getPosition();
                 vector<Bug *> &cell = boardCells[position.first + (position.second * width)];
                 cell.push_back(bug);
@@ -66,9 +65,9 @@ void Board::getBugByID() const {
 }
 
 void Board::displayBoardCells() const {
-        int length = 10;
         int width = 10;
         for (int x = 0; x < width; x++) {
+                constexpr int length = 10;
                 for (int y = 0; y < length; y++) {
                         vector<Bug *> cell = boardCells[x + (y * width)];
                         cout << "(" << x << "," << y << "): ";
@@ -108,27 +107,7 @@ void Board::tap() const {
                 }
         }
         bug_vector[indexOfFrozenBug]->setNotFrozen();
-        //check if bugs are landed on same cell
-        const int width = 10;
-        int length = 10;
-        for (int x = 0; x < width; x++) {
-                for (int y = 0; y < length; y++) {
-                        if (vector<Bug *> cell = boardCells[x + (y * width)]; cell.size() > 1) {
-                                std::uniform_int_distribution<> cellPicker{0, static_cast<int>(cell.size())};
-                                int indexOfSafeBug = cellPicker(mt);
-                                //if uneven number of bugs decide which bug is safe
-                                if (cell.size() % 2 == 1) {
-                                        cell[indexOfSafeBug]->setFrozen();
-                                }
-                                //pair bugs for fighting
-
-                                //three rounds of fighting where each bug takes between 1 - 5 damage
-                                //if a bug dies the fight ends
-                                cell[indexOfSafeBug]->setNotFrozen();
-                        }
-                }
-        }
-        //check if bugs died
+        fightingLogic();
 }
 
 void Board::displayAllBugsLifeHistory() const {
@@ -154,6 +133,30 @@ void Board::printMenuOptions() {
         cout << "6. Display all Cells listing their Bugs" << endl;
         cout << "7. Run simulation (generates a Tap every second)" << endl;
         cout << "8. Exit (write Life History of all Bugs to file)" << endl;
+}
+
+void Board::fightingLogic() const {
+        //check if bugs are landed on same cell
+        constexpr int width = 10;
+        for (int x = 0; x < width; x++) {
+                int length = 10;
+                for (int y = 0; y < length; y++) {
+                        if (vector<Bug *> cell = boardCells[x + (y * width)]; cell.size() > 1) {
+                                std::uniform_int_distribution<> cellPicker{0, static_cast<int>(cell.size())};
+                                int indexOfSafeBug = cellPicker(mt);
+                                //if uneven number of bugs decide which bug is safe
+                                if (cell.size() % 2 == 1) {
+                                        cell[indexOfSafeBug]->setFrozen();
+                                }
+                                //pair bugs for fighting
+
+                                //three rounds of fighting where each bug takes between 1 - 5 damage
+                                //if a bug dies the fight ends
+                                cell[indexOfSafeBug]->setNotFrozen();
+                        }
+                }
+        }
+        //check if bugs died
 }
 
 void Board::parseLine(const string &line, Bug *&bug) {

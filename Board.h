@@ -33,6 +33,8 @@ public:
         void deleteBugPointers();
 
         static void printMenuOptions();
+
+        void fightingLogic() const ;
 };
 
 
