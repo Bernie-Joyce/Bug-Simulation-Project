@@ -114,16 +114,17 @@ void Board::tap() const {
         for (int x = 0; x < width; x++) {
                 for (int y = 0; y < length; y++) {
                         if (vector<Bug *> cell = boardCells[x + (y * width)]; cell.size() > 1) {
+                                std::uniform_int_distribution<> cellPicker{0, static_cast<int>(cell.size())};
+                                int indexOfSafeBug = cellPicker(mt);
                                 //if uneven number of bugs decide which bug is safe
                                 if (cell.size() % 2 == 1) {
-                                        std::uniform_int_distribution<> cellPicker{0, static_cast<int>(cell.size())};
-                                        int indexOfSafeBug = cellPicker(mt);
                                         cell[indexOfSafeBug]->setFrozen();
                                 }
                                 //pair bugs for fighting
 
                                 //three rounds of fighting where each bug takes between 1 - 5 damage
                                 //if a bug dies the fight ends
+                                cell[indexOfSafeBug]->setNotFrozen();
                         }
                 }
         }
