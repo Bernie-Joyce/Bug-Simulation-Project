@@ -117,7 +117,7 @@ void Board::tap() const {
                                 //if uneven number of bugs decide which bug is safe
                                 if (cell.size() % 2 == 1) {
                                         std::uniform_int_distribution<> cellPicker{0, static_cast<int>(cell.size())};
-                                        int indexOfSafeBug = frozenPicker(mt);
+                                        int indexOfSafeBug = cellPicker(mt);
                                         cell[indexOfSafeBug]->setFrozen();
                                 }
                                 //pair bugs for fighting
