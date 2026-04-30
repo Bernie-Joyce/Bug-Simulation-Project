@@ -101,6 +101,20 @@ void Board::tap() const {
         for (Bug *bug: bug_vector) {
                 bug->move();
         }
+        //check if bugs are landed on same cell
+
+
+        //decide which bug is frozen
+
+        //pair bugs for fighting
+
+        //if uneven number of bugs decide which bug is safe
+
+        //three rounds of fighting where each bug takes between 1 - 5 damage
+
+        //if a bug dies the fight ends
+
+        //check if bugs died
 }
 
 void Board::displayAllBugsLifeHistory() const {
