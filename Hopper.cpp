@@ -46,6 +46,11 @@ void Hopper::displayLifeHistory() {
         cout << "," << alive_str;
 }
 
+void Hopper::displayTypeAndID() {
+        cout << "Hopper";
+        Bug::displayTypeAndID();
+}
+
 
 Hopper::Hopper(const int id, const int x_Coordinate, const int y_Coordinate, const Direction direction,
                const int health, const int hopLength) : Bug(

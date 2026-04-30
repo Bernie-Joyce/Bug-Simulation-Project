@@ -40,3 +40,8 @@ void Crawler::displayLifeHistory() {
 
         cout << "," << alive_str;
 }
+
+void Crawler::displayTypeAndID() {
+        cout << "Crawler";
+        Bug::displayTypeAndID();
+}
