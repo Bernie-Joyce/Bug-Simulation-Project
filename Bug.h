@@ -27,19 +27,25 @@ class Bug {
 public:
         virtual ~Bug() = default;
 
+        bool getFrozen();
+
         virtual void display();
 
         virtual void move() = 0;
 
         [[nodiscard]] int getId() const;
 
-        [[nodiscard]] pair<int,int> getPosition() const;
+        [[nodiscard]] pair<int, int> getPosition() const;
 
         virtual void displayTypeAndID();
 
-        virtual void displayLifeHistory()=0;
+        virtual void displayLifeHistory() =0;
 
         Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
+
+        void setFrozen();
+
+        void setNotFrozen();
 
 protected:
         int id{};
@@ -48,6 +54,9 @@ protected:
         int health{};
         bool alive{true};
         list<pair<int, int> > path;
+
         [[nodiscard]] bool isWayBlocked() const;
+
+        bool frozen;
 };
 #endif //A_BUGS_LIFE_BUG_H

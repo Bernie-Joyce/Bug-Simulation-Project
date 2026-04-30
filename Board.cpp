@@ -98,22 +98,26 @@ void Board::displayAllBugs() const {
 
 void Board::tap() const {
         if (bug_vector.empty()) cout << "No bugs loaded!" << endl;
+        //set frozen bug
+        std::uniform_int_distribution<> frozenPicker{0, static_cast<int>(bug_vector.size())};
+        int indexOfFrozenBug = frozenPicker(mt);
+        bug_vector[indexOfFrozenBug]->setFrozen();
         for (Bug *bug: bug_vector) {
-                bug->move();
+                if (!bug->getFrozen()) {
+                        bug->move();
+                }
         }
+        bug_vector[indexOfFrozenBug]->setNotFrozen();
         //check if bugs are landed on same cell
-        int width = 10;
+        const int width = 10;
         int length = 10;
         for (int x = 0; x < width; x++) {
                 for (int y = 0; y < length; y++) {
-                        vector<Bug *> cell = boardCells[x + (y * width)];
-                        if (cell.size() > 1) {
-
+                        if (vector<Bug *> cell = boardCells[x + (y * width)]; cell.size() > 1) {
                         }
                 }
         }
 
-        //decide which bug is frozen
 
         //pair bugs for fighting
 
