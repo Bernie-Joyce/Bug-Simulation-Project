@@ -102,7 +102,16 @@ void Board::tap() const {
                 bug->move();
         }
         //check if bugs are landed on same cell
+        int width = 10;
+        int length = 10;
+        for (int x = 0; x < width; x++) {
+                for (int y = 0; y < length; y++) {
+                        vector<Bug *> cell = boardCells[x + (y * width)];
+                        if (cell.size() > 1) {
 
+                        }
+                }
+        }
 
         //decide which bug is frozen
 
