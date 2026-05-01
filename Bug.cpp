@@ -40,6 +40,31 @@ Bug::Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int he
         this->position.second = y_Coordinate;
         this->direction_ = direction;
         this->health = health;
+        this->frozen = false;
+}
+
+void Bug::setFrozen() {
+        this->frozen = true;
+}
+
+void Bug::setNotFrozen() {
+        this->frozen = false;
+}
+
+bool Bug::getAlive() {
+        return this->alive;
+}
+
+int Bug::getHealth() {
+        return this->health;
+}
+
+void Bug::setAlive(bool status) {
+        this->alive = status;
+}
+
+void Bug::takeDamage(int damage) {
+        this->health -= damage;
 }
 
 int Bug::getId() const {
@@ -54,6 +79,10 @@ void Bug::displayTypeAndID() {
         cout << ": " << id;
 }
 
+
+bool Bug::getFrozen() {
+        return this->frozen;
+}
 
 void Bug::display() {
         const vector<string> directionsList = {"North", "South", "East", "West"};

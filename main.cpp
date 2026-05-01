@@ -45,6 +45,6 @@ int main() {
                         default: cout << "Invalid command" << endl;
                 }
         }
-       board.deleteBugPointers();
+       board.deleteBugVector();
         return 0;
 }
