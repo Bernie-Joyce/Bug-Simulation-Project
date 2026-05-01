@@ -47,6 +47,14 @@ public:
 
         void setNotFrozen();
 
+        bool getAlive();
+
+        int getHealth();
+
+        void setAlive(bool);
+
+        void takeDamage(int damage);
+
 protected:
         int id{};
         pair<int, int> position;

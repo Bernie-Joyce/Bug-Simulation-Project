@@ -9,16 +9,18 @@
 #include "Bug.h"
 
 
-
 class Board {
         vector<Bug *> bug_vector;
         vector<vector<Bug *> > boardCells;
+
         static void parseLine(const string &line, Bug * &bug);
+
         void fillBoardCells();
+
 public:
         void load(const std::string &fileName);
 
-        Board ();
+        Board();
 
         void getBugByID() const;
 
@@ -26,15 +28,20 @@ public:
 
         void displayAllBugs() const;
 
-        void tap() const;
+        void tap();
 
         void displayAllBugsLifeHistory() const;
 
-        void deleteBugPointers();
+        void deleteBugVector();
 
         static void printMenuOptions();
 
-        void fightingLogic() const ;
+        void fightingLogic();
+
+
+        void delete_board_cells();
+
+        ~Board();
 };
 
 

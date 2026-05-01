@@ -51,6 +51,22 @@ void Bug::setNotFrozen() {
         this->frozen = false;
 }
 
+bool Bug::getAlive() {
+        return this->alive;
+}
+
+int Bug::getHealth() {
+        return this->health;
+}
+
+void Bug::setAlive(bool status) {
+        this->alive = status;
+}
+
+void Bug::takeDamage(int damage) {
+        this->health -= damage;
+}
+
 int Bug::getId() const {
         return this->id;
 }
