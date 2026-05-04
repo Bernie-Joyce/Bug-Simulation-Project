@@ -6,7 +6,7 @@
 #define A_BUGS_LIFE_BOARD_H
 #include <vector>
 
-#include "Bug.h"
+#include "../Bugs/Bug.h"
 
 
 class Board {
