@@ -3,8 +3,8 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
-#include "Crawler.h"
-#include "Hopper.h"
+#include "../Bugs/Crawler.h"
+#include "../Bugs/Hopper.h"
 
 void Board::load(const std::string &fileName) {
         if (!bug_vector.empty()) {
