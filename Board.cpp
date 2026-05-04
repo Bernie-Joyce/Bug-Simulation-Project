@@ -109,11 +109,18 @@ void Board::tap() {
                         }
                 }
                 bug_vector[indexOfFrozenBug]->setNotFrozen();
+                fightingLogic();
+                std::erase_if(bug_vector, [](Bug *bug) {
+                        if (!bug->getAlive()) {
+                                delete bug;
+                                return true;
+                        }
+                        return false;
+                });
                 for (auto &cell: boardCells) {
                         cell.clear();
                 }
                 fillBoardCells();
-                fightingLogic();
         }
 }
 
@@ -182,6 +189,12 @@ void Board::fightingLogic() {
                                 }
                         }
                 }
+        }
+}
+
+void Board::runSimulation() {
+        while (bug_vector.size() > 1) {
+                tap();
         }
 }
 

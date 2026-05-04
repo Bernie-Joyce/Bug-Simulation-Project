@@ -38,6 +38,7 @@ public:
 
         void fightingLogic();
 
+        void runSimulation();
 
         void delete_board_cells();
 
