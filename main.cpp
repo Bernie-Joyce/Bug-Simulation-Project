@@ -37,7 +37,7 @@ int main() {
                                 board.displayBoardCells();
                                 break;
                         case 7:
-                                cout << "\nRun simulation";
+                                board.runSimulation();
                                 break;
                         case 8:
                                 cout << "Program over";
