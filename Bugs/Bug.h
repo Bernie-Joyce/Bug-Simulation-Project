@@ -41,6 +41,8 @@ public:
 
         virtual void displayLifeHistory() =0;
 
+        void displayLifeHistoryInital();
+
         Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
 
         void setFrozen();
@@ -53,7 +55,7 @@ public:
 
         void setAlive(bool);
 
-        void takeDamage(int damage);
+        virtual void takeDamage(int damage);
 
 protected:
         int id{};

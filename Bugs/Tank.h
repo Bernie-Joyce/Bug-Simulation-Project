@@ -14,7 +14,11 @@ public:
         Tank(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health, int defense);
         int getDefense();
         void setDefense(int defense);
-
+        void display() override;
+        void move() override;
+        void displayLifeHistory() override;
+        void displayTypeAndID() override;
+        void takeDamage(int damage) override;
 };
 
 
