@@ -40,7 +40,7 @@ int main() {
                                 board.runSimulation();
                                 break;
                         case 8:
-                                cout << "Program over";
+                                board.writeLifeHistory("bugs_life_history_date_time.out");
                                 break;
                         default: cout << "Invalid command" << endl;
                 }

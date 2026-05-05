@@ -12,7 +12,7 @@ public:
         void move() override;
         void display() override;
         Crawler(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
-        void displayLifeHistory() override;
+        string displayLifeHistory() override;
         void displayTypeAndID() override;
         void takeDamage(int damage) override;
 };

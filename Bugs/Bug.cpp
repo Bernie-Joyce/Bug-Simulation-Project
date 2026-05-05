@@ -5,6 +5,7 @@
 #include "Bug.h"
 
 #include <iostream>
+#include <sstream>
 
 bool Bug::isWayBlocked() const {
         {
@@ -25,12 +26,14 @@ bool Bug::isWayBlocked() const {
 }
 
 
-void Bug::displayLifeHistoryInital() {
+string Bug::displayLifeHistoryInitial() {
+        std::stringstream ss;
         for (pair position: path) {
-                cout << "(" << position.first << "," << position.second << ")";
+                ss << "(" << position.first << "," << position.second << ")";
         }
-        string alive_str = alive ? "Alive" : "Dead";
-        cout << "," << alive_str;
+        string alive_str = alive ? "Alive" : "Eaten by " + eatenById;
+        ss << "," << alive_str;
+        return ss.str();
 }
 
 Bug::Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health) {
@@ -73,6 +76,10 @@ void Bug::setAlive(bool status) {
 
 void Bug::takeDamage(int damage) {
         this->health -= damage;
+}
+
+void Bug::setEatenById(const string &_eatenById) {
+        this->eatenById = _eatenById;
 }
 
 int Bug::getId() const {
