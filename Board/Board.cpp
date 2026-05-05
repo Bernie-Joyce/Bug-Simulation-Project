@@ -113,9 +113,14 @@ void Board::tap() {
                 }
                 bug_vector[indexOfFrozenBug]->setNotFrozen();
                 fightingLogic();
+
+                for (Bug *bug: bug_vector) {
+                        if (!bug->getAlive()) {
+                                dead_bugs.push_back(bug);
+                        }
+                }
                 std::erase_if(bug_vector, [](Bug *bug) {
                         if (!bug->getAlive()) {
-                                delete bug;
                                 return true;
                         }
                         return false;
@@ -241,6 +246,6 @@ void Board::parseLine(const string &line, Bug *&bug) {
                 string defense;
                 getline(ss, defense, ';');
                 bug = new Tank(stoi(id), stoi(x_Coord), stoi(y_Coord), enumDirection, stoi(health),
-                                 stoi(defense));
+                               stoi(defense));
         }
 }

@@ -12,6 +12,7 @@
 class Board {
         vector<Bug *> bug_vector;
         vector<vector<Bug *> > boardCells;
+        vector<Bug *> dead_bugs;
 
         static void parseLine(const string &line, Bug * &bug);
 
