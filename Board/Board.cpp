@@ -107,6 +107,44 @@ void Board::displayAllBugs() const {
         }
 }
 
+void Board::menu() {
+        printMenuOptions();
+        int commandNumber = 0;
+        string bug_file = "bugs.txt";
+        string bug_history_file = "bugs_life_history_date_time.out";
+        while (commandNumber != 8) {
+                cout << "Enter a command (1 - 8): ";
+                string command;
+                getline(cin, command);
+                try {
+                        commandNumber = stoi(command);
+                } catch (const std::exception &) {
+                        cout << "Please enter a valid number." << endl;
+                        continue;
+                }
+                switch (commandNumber) {
+                        case 1: load(bug_file);
+                                break;
+                        case 2: displayAllBugs();
+                                break;
+                        case 3: getBugByID();
+                                break;
+                        case 4: tap();
+                                break;
+                        case 5: displayAllBugsLifeHistory();
+                                break;
+                        case 6: displayBoardCells();
+                                break;
+                        case 7: runSimulation();
+                                break;
+                        case 8: writeLifeHistory(bug_history_file);
+                                break;
+                        default: cout << "Invalid command" << endl;
+                }
+        }
+        deleteBugVector();
+}
+
 void Board::tap() {
         if (alive_bugs.empty()) {
                 cout << "No bugs loaded!" << endl;

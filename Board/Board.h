@@ -25,6 +25,8 @@ public:
 
         Board();
 
+        void menu();
+
         void getBugByID() const;
 
         void displayBoardCells() const;
