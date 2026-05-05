@@ -57,6 +57,8 @@ public:
 
         virtual void takeDamage(int damage);
 
+        void setEatenById(const string &_eatenById);
+
 protected:
         int id{};
         pair<int, int> position;
@@ -64,6 +66,7 @@ protected:
         int health{};
         bool alive{true};
         list<pair<int, int> > path;
+        string eatenById;
 
         [[nodiscard]] bool isWayBlocked() const;
 

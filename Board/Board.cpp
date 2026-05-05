@@ -32,6 +32,10 @@ void Board::load(const std::string &fileName) {
         }
 }
 
+void Board::writeLifeHistory(const std::string &filename) {
+
+}
+
 Board::Board() {
         this->boardCells.resize(10 * 10);
 }

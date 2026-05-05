@@ -75,6 +75,10 @@ void Bug::takeDamage(int damage) {
         this->health -= damage;
 }
 
+void Bug::setEatenById(const string &_eatenById) {
+        this->eatenById = _eatenById;
+}
+
 int Bug::getId() const {
         return this->id;
 }

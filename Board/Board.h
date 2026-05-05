@@ -15,11 +15,12 @@ class Board {
         vector<Bug *> dead_bugs;
 
         static void parseLine(const string &line, Bug * &bug);
-
         void fillBoardCells();
 
 public:
         void load(const std::string &fileName);
+
+        void writeLifeHistory(const std::string &filename);
 
         Board();
 
