@@ -33,15 +33,14 @@ Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, c
 
 void Crawler::displayLifeHistory() {
         cout << to_string(id) << " Crawler Path:";
-        for (pair position: path) {
-                cout << "(" << position.first << "," << position.second << ")";
-        }
-        string alive_str = alive ? "Alive" : "Dead";
-
-        cout << "," << alive_str;
+        displayLifeHistoryInital();
 }
 
 void Crawler::displayTypeAndID() {
         cout << "Crawler";
         Bug::displayTypeAndID();
+}
+
+void Crawler::takeDamage(int damage) {
+        Bug::takeDamage(damage);
 }

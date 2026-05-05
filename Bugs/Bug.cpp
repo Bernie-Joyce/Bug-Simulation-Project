@@ -25,6 +25,14 @@ bool Bug::isWayBlocked() const {
 }
 
 
+void Bug::displayLifeHistoryInital() {
+        for (pair position: path) {
+                cout << "(" << position.first << "," << position.second << ")";
+        }
+        string alive_str = alive ? "Alive" : "Dead";
+        cout << "," << alive_str;
+}
+
 Bug::Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health) {
         if (x_Coordinate < 0 || x_Coordinate > 9) {
                 throw std::invalid_argument("x_Coordinate must be between 0 and 9");

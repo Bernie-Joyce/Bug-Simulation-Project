@@ -15,6 +15,7 @@ public:
         void display() override;
         void displayLifeHistory() override;
         void displayTypeAndID() override;
+        void takeDamage(int damage) override;
 };
 
 

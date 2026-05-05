@@ -3,8 +3,11 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
+#include <thread>
+
 #include "../Bugs/Crawler.h"
 #include "../Bugs/Hopper.h"
+#include "../Bugs/Tank.h"
 
 void Board::load(const std::string &fileName) {
         if (!bug_vector.empty()) {
@@ -194,6 +197,7 @@ void Board::fightingLogic() {
 
 void Board::runSimulation() {
         while (bug_vector.size() > 1) {
+                //this_thread::sleep_for(chrono::seconds(1));
                 tap();
         }
 }
@@ -231,5 +235,12 @@ void Board::parseLine(const string &line, Bug *&bug) {
                 getline(ss, hopLength, ';');
                 bug = new Hopper(stoi(id), stoi(x_Coord), stoi(y_Coord), enumDirection, stoi(health),
                                  stoi(hopLength));
+        }
+
+        if (type == "T") {
+                string defense;
+                getline(ss, defense, ';');
+                bug = new Tank(stoi(id), stoi(x_Coord), stoi(y_Coord), enumDirection, stoi(health),
+                                 stoi(defense));
         }
 }

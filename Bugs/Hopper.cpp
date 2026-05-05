@@ -38,17 +38,16 @@ void Hopper::display() {
 
 void Hopper::displayLifeHistory() {
         cout << to_string(id) << " Hopper Path:";
-        for (pair position: path) {
-                cout << "(" << position.first << "," << position.second << ")";
-        }
-        string alive_str = alive ? "Alive" : "Dead";
-
-        cout << "," << alive_str;
+        displayLifeHistoryInital();
 }
 
 void Hopper::displayTypeAndID() {
         cout << "Hopper";
         Bug::displayTypeAndID();
+}
+
+void Hopper::takeDamage(int damage) {
+        Bug::takeDamage(damage);
 }
 
 
