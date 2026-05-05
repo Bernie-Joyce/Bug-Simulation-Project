@@ -3,6 +3,8 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
+#include <thread>
+
 #include "../Bugs/Crawler.h"
 #include "../Bugs/Hopper.h"
 #include "../Bugs/Tank.h"
@@ -195,6 +197,7 @@ void Board::fightingLogic() {
 
 void Board::runSimulation() {
         while (bug_vector.size() > 1) {
+                //this_thread::sleep_for(chrono::seconds(1));
                 tap();
         }
 }
