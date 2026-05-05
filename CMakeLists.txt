@@ -3,7 +3,7 @@ project(A_Bugs_Life)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(A_Bugs_Life main.cpp
+add_executable(A_Bugs_Life App/main.cpp
         Bugs/Bug.h
         Bugs/Crawler.h
         Bugs/Crawler.cpp

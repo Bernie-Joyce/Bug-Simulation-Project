@@ -1,8 +1,8 @@
 #include <iostream>
 #include <ostream>
 
-#include "Board/Board.h"
-#include "Bugs/Bug.h"
+#include "../Board/Board.h"
+#include "../Bugs/Bug.h"
 
 int main() {
         Board board = Board{};
