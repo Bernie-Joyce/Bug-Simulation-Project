@@ -100,8 +100,8 @@ void Board::displayBoardCells() const {
 }
 
 void Board::displayAllBugs() const {
-        if (alive_bugs.empty()) cout << "No bugs loaded!" << endl;
-        for (Bug *bug: alive_bugs) {
+        if (all_bugs.empty()) cout << "No bugs loaded!" << endl;
+        for (Bug *bug: all_bugs) {
                 bug->display();
                 cout << endl;
         }
