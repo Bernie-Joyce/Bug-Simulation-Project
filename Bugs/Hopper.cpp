@@ -36,9 +36,8 @@ void Hopper::display() {
         cout << " " << to_string(hopLength);
 }
 
-void Hopper::displayLifeHistory() {
-        cout << to_string(id) << " Hopper Path:";
-        displayLifeHistoryInitial();
+string Hopper::displayLifeHistory() {
+        return to_string(id) + " Hopper Path:" + displayLifeHistoryInitial();
 }
 
 void Hopper::displayTypeAndID() {

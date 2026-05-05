@@ -10,7 +10,8 @@
 
 
 class Board {
-        vector<Bug *> bug_vector;
+        vector<Bug *> alive_bugs;
+        vector<Bug *> all_bugs;
         vector<vector<Bug *> > boardCells;
         vector<Bug *> dead_bugs;
 

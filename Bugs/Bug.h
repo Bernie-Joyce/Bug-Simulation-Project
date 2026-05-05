@@ -39,9 +39,9 @@ public:
 
         virtual void displayTypeAndID();
 
-        virtual void displayLifeHistory() =0;
+        virtual string displayLifeHistory() =0;
 
-        void displayLifeHistoryInitial();
+        string displayLifeHistoryInitial();
 
         Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
 
@@ -66,7 +66,7 @@ protected:
         int health{};
         bool alive{true};
         list<pair<int, int> > path;
-        string eatenById;
+        string eatenById{};
 
         [[nodiscard]] bool isWayBlocked() const;
 

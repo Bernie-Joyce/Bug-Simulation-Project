@@ -16,7 +16,7 @@ public:
         void setDefense(int defense);
         void display() override;
         void move() override;
-        void displayLifeHistory() override;
+        string displayLifeHistory() override;
         void displayTypeAndID() override;
         void takeDamage(int damage) override;
 };

@@ -10,7 +10,7 @@
 #include "../Bugs/Tank.h"
 
 void Board::load(const std::string &fileName) {
-        if (!bug_vector.empty()) {
+        if (!alive_bugs.empty()) {
                 cout << "Bugs already loaded" << endl;
         } else {
                 if (ifstream fin(fileName); fin.is_open()) {
@@ -20,12 +20,13 @@ void Board::load(const std::string &fileName) {
                                 Bug *currentBug = nullptr;
                                 parseLine(line, currentBug);
                                 if (currentBug != nullptr) {
-                                        bug_vector.push_back(currentBug);
+                                        alive_bugs.push_back(currentBug);
+                                        all_bugs.push_back(currentBug);
                                 }
                         }
                         fin.close();
                         fillBoardCells();
-                        cout << "Bugs Loaded: " << bug_vector.size() << endl;
+                        cout << "Bugs Loaded: " << alive_bugs.size() << endl;
                 } else {
                         cout << "Error opening file." << endl;
                 }
@@ -33,7 +34,11 @@ void Board::load(const std::string &fileName) {
 }
 
 void Board::writeLifeHistory(const std::string &filename) {
-
+        if (ofstream writer(filename); writer.is_open()) {
+                for (Bug *bug: all_bugs) {
+                        writer << bug->displayLifeHistory() << endl;
+                }
+        }
 }
 
 Board::Board() {
@@ -41,7 +46,7 @@ Board::Board() {
 }
 
 void Board::fillBoardCells() {
-        for (auto bug: bug_vector) {
+        for (auto bug: alive_bugs) {
                 constexpr int width = 10;
                 pair position = bug->getPosition();
                 vector<Bug *> &cell = boardCells[position.first + (position.second * width)];
@@ -50,7 +55,7 @@ void Board::fillBoardCells() {
 }
 
 void Board::getBugByID() const {
-        if (bug_vector.empty()) {
+        if (alive_bugs.empty()) {
                 cout << "No bugs loaded!" << endl;
                 return;
         }
@@ -59,7 +64,7 @@ void Board::getBugByID() const {
         getline(cin, bugId);
         const int bugIdNum = stoi(bugId);
         bool found = false;
-        for (Bug *bug: bug_vector) {
+        for (Bug *bug: alive_bugs) {
                 if (bug->getId() == bugIdNum) {
                         bug->display();
                         cout << endl;
@@ -95,35 +100,35 @@ void Board::displayBoardCells() const {
 }
 
 void Board::displayAllBugs() const {
-        if (bug_vector.empty()) cout << "No bugs loaded!" << endl;
-        for (Bug *bug: bug_vector) {
+        if (alive_bugs.empty()) cout << "No bugs loaded!" << endl;
+        for (Bug *bug: alive_bugs) {
                 bug->display();
                 cout << endl;
         }
 }
 
 void Board::tap() {
-        if (bug_vector.empty()) {
+        if (alive_bugs.empty()) {
                 cout << "No bugs loaded!" << endl;
         } else {
                 //set frozen bug
-                std::uniform_int_distribution<> frozenPicker{0, static_cast<int>(bug_vector.size() - 1)};
+                std::uniform_int_distribution<> frozenPicker{0, static_cast<int>(alive_bugs.size() - 1)};
                 int indexOfFrozenBug = frozenPicker(mt);
-                bug_vector[indexOfFrozenBug]->setFrozen();
-                for (Bug *bug: bug_vector) {
+                alive_bugs[indexOfFrozenBug]->setFrozen();
+                for (Bug *bug: alive_bugs) {
                         if (!bug->getFrozen()) {
                                 bug->move();
                         }
                 }
-                bug_vector[indexOfFrozenBug]->setNotFrozen();
+                alive_bugs[indexOfFrozenBug]->setNotFrozen();
                 fightingLogic();
 
-                for (Bug *bug: bug_vector) {
+                for (Bug *bug: alive_bugs) {
                         if (!bug->getAlive()) {
                                 dead_bugs.push_back(bug);
                         }
                 }
-                std::erase_if(bug_vector, [](Bug *bug) {
+                std::erase_if(alive_bugs, [](Bug *bug) {
                         if (!bug->getAlive()) {
                                 return true;
                         }
@@ -137,17 +142,16 @@ void Board::tap() {
 }
 
 void Board::displayAllBugsLifeHistory() const {
-        for (Bug *bug: bug_vector) {
-                bug->displayLifeHistory();
-                cout << endl;
+        for (Bug *bug: all_bugs) {
+                cout << bug->displayLifeHistory() << endl;
         }
 }
 
 void Board::deleteBugVector() {
-        for (const Bug *bug: bug_vector) {
+        for (const Bug *bug: alive_bugs) {
                 delete bug;
         }
-        bug_vector.clear();
+        alive_bugs.clear();
 }
 
 void Board::printMenuOptions() {
@@ -207,8 +211,8 @@ void Board::fightingLogic() {
 }
 
 void Board::runSimulation() {
-        while (bug_vector.size() > 1) {
-                //this_thread::sleep_for(chrono::seconds(1));
+        while (alive_bugs.size() > 1) {
+                this_thread::sleep_for(chrono::seconds(1));
                 tap();
         }
 }

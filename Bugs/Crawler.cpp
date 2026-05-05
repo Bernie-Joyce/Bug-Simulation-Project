@@ -31,9 +31,8 @@ Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, c
                  const int health) : Bug(id, x_Coordinate, y_Coordinate, direction, health) {
 }
 
-void Crawler::displayLifeHistory() {
-        cout << to_string(id) << " Crawler Path:";
-        displayLifeHistoryInitial();
+string Crawler::displayLifeHistory() {
+        return to_string(id) + " Crawler Path:" + displayLifeHistoryInitial();
 }
 
 void Crawler::displayTypeAndID() {
