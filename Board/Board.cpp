@@ -192,9 +192,11 @@ void Board::fightingLogic() {
                                                         pairedBug.second->takeDamage(secondDamage);
                                                         if (pairedBug.first->getHealth() < 1) {
                                                                 pairedBug.first->setAlive(false);
+                                                                pairedBug.first->setEatenById(to_string(pairedBug.second->getId()));
                                                         }
                                                         if (pairedBug.second->getHealth() < 1) {
                                                                 pairedBug.second->setAlive(false);
+                                                                pairedBug.second->setEatenById(to_string(pairedBug.first->getId()));
                                                         }
                                                 }
                                         }

@@ -33,7 +33,7 @@ Crawler::Crawler(const int id, const int x_Coordinate, const int y_Coordinate, c
 
 void Crawler::displayLifeHistory() {
         cout << to_string(id) << " Crawler Path:";
-        displayLifeHistoryInital();
+        displayLifeHistoryInitial();
 }
 
 void Crawler::displayTypeAndID() {

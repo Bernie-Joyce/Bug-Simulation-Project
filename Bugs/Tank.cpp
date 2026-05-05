@@ -49,7 +49,7 @@ void Tank::move() {
 
 void Tank::displayLifeHistory() {
         cout << to_string(id) << " Tank Path:";
-        displayLifeHistoryInital();
+        displayLifeHistoryInitial();
 }
 
 void Tank::displayTypeAndID() {

@@ -41,7 +41,7 @@ public:
 
         virtual void displayLifeHistory() =0;
 
-        void displayLifeHistoryInital();
+        void displayLifeHistoryInitial();
 
         Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
 

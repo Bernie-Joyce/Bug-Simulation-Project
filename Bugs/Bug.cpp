@@ -25,7 +25,7 @@ bool Bug::isWayBlocked() const {
 }
 
 
-void Bug::displayLifeHistoryInital() {
+void Bug::displayLifeHistoryInitial() {
         for (pair position: path) {
                 cout << "(" << position.first << "," << position.second << ")";
         }
