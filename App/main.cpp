@@ -23,11 +23,7 @@ int main() {
                                 break;
                         case 2: board.displayAllBugs();
                                 break;
-                        case 3: try {
-                                        board.getBugByID();
-                                } catch (const std::exception &) {
-                                        cout << "Bug not found" << endl;
-                                }
+                        case 3: board.getBugByID();
                                 break;
                         case 4: board.tap();
                                 break;
@@ -45,6 +41,6 @@ int main() {
                         default: cout << "Invalid command" << endl;
                 }
         }
-       board.deleteBugVector();
+        board.deleteBugVector();
         return 0;
 }
