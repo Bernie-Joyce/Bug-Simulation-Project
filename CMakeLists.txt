@@ -11,4 +11,6 @@ add_executable(A_Bugs_Life main.cpp
         Bugs/Hopper.h
         Bugs/Hopper.cpp
         Board/Board.h
-        Board/Board.cpp)
+        Board/Board.cpp
+        Bugs/Tank.h
+        Bugs/Tank.cpp)
