@@ -27,7 +27,6 @@ class Bug {
 public:
         virtual ~Bug() = default;
 
-        bool getFrozen();
 
         virtual void display();
 
@@ -37,11 +36,17 @@ public:
 
         [[nodiscard]] pair<int, int> getPosition() const;
 
+        [[nodiscard]] bool getAlive() const;
+
+        [[nodiscard]] int getHealth() const;
+
+        [[nodiscard]] bool getFrozen() const;
+
         virtual void displayTypeAndID();
 
         virtual string displayLifeHistory() =0;
 
-        string displayLifeHistoryInitial();
+        [[nodiscard]] string displayLifeHistoryInitial() const;
 
         Bug(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
 
@@ -49,9 +54,6 @@ public:
 
         void setNotFrozen();
 
-        bool getAlive();
-
-        int getHealth();
 
         void setAlive(bool);
 

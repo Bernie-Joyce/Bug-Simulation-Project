@@ -26,10 +26,10 @@ bool Bug::isWayBlocked() const {
 }
 
 
-string Bug::displayLifeHistoryInitial() {
+string Bug::displayLifeHistoryInitial() const {
         std::stringstream ss;
-        for (pair position: path) {
-                ss << "(" << position.first << "," << position.second << ")";
+        for (pair _position: path) {
+                ss << "(" << _position.first << "," << _position.second << ")";
         }
         string alive_str = alive ? "Alive" : "Eaten by " + eatenById;
         ss << "," << alive_str;
@@ -62,11 +62,11 @@ void Bug::setNotFrozen() {
         this->frozen = false;
 }
 
-bool Bug::getAlive() {
+bool Bug::getAlive() const {
         return this->alive;
 }
 
-int Bug::getHealth() {
+int Bug::getHealth() const {
         return this->health;
 }
 
@@ -95,7 +95,7 @@ void Bug::displayTypeAndID() {
 }
 
 
-bool Bug::getFrozen() {
+bool Bug::getFrozen() const {
         return this->frozen;
 }
 

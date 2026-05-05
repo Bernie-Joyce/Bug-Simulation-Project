@@ -8,12 +8,11 @@
 
 
 class Tank : public Bug{
-private:
         int defense;
 public:
         Tank(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health, int defense);
-        int getDefense();
-        void setDefense(int defense);
+        [[nodiscard]] int getDefense() const;
+        void setDefense(int _defense);
         void display() override;
         void move() override;
         string displayLifeHistory() override;

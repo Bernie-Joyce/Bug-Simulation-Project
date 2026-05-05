@@ -14,12 +14,12 @@ Tank::Tank(int id, int x_Coordinate, int y_Coordinate, Direction direction, int 
         this->defense = defense;
 }
 
-int Tank::getDefense() {
+int Tank::getDefense() const {
         return this->defense;
 }
 
-void Tank::setDefense(int defense) {
-        this->defense = defense;
+void Tank::setDefense(int _defense) {
+        this->defense = _defense;
 }
 
 void Tank::display() {

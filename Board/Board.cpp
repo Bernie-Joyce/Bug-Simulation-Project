@@ -33,7 +33,7 @@ void Board::load(const std::string &fileName) {
         }
 }
 
-void Board::writeLifeHistory(const std::string &filename) {
+void Board::writeLifeHistory(const std::string &filename) const {
         if (ofstream writer(filename); writer.is_open()) {
                 for (Bug *bug: all_bugs) {
                         writer << bug->displayLifeHistory() << endl;
@@ -166,7 +166,7 @@ void Board::tap() {
                                 dead_bugs.push_back(bug);
                         }
                 }
-                std::erase_if(alive_bugs, [](Bug *bug) {
+                std::erase_if(alive_bugs, [](Bug const *bug) {
                         if (!bug->getAlive()) {
                                 return true;
                         }
@@ -203,7 +203,7 @@ void Board::printMenuOptions() {
         cout << "8. Exit (write Life History of all Bugs to file)" << endl;
 }
 
-void Board::fightingLogic() {
+void Board::fightingLogic() const {
         //check if bugs are landed on same cell
         constexpr int width = 10;
         std::uniform_int_distribution<> damagePicker{1, 5};

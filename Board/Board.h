@@ -21,7 +21,7 @@ class Board {
 public:
         void load(const std::string &fileName);
 
-        void writeLifeHistory(const std::string &filename);
+        void writeLifeHistory(const std::string &filename) const;
 
         Board();
 
@@ -41,7 +41,7 @@ public:
 
         static void printMenuOptions();
 
-        void fightingLogic();
+        void fightingLogic() const;
 
         void runSimulation();
 
