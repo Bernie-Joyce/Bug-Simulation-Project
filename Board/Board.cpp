@@ -259,6 +259,7 @@ void Board::runSimulation() {
         while (alive_bugs.size() > 1) {
                 this_thread::sleep_for(chrono::seconds(1));
                 tap();
+                displayBoardCells();
         }
 }
 

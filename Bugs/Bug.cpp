@@ -91,7 +91,7 @@ pair<int, int> Bug::getPosition() const {
 }
 
 string Bug::displayTypeAndID() {
-        return + ": " + id;
+        return + ": " + to_string(id);
 }
 
 
