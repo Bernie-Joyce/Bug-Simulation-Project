@@ -16,7 +16,7 @@ public:
         void display() override;
         void move() override;
         string displayLifeHistory() override;
-        void displayTypeAndID() override;
+        string displayTypeAndID() override;
         void takeDamage(int damage) override;
 };
 

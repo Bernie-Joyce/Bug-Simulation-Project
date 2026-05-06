@@ -40,9 +40,8 @@ string Hopper::displayLifeHistory() {
         return to_string(id) + " Hopper Path:" + displayLifeHistoryInitial();
 }
 
-void Hopper::displayTypeAndID() {
-        cout << "Hopper";
-        Bug::displayTypeAndID();
+string Hopper::displayTypeAndID() {
+        return "Hopper" + Bug::displayTypeAndID();
 }
 
 void Hopper::takeDamage(int damage) {

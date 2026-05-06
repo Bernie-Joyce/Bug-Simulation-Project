@@ -77,25 +77,30 @@ void Board::getBugByID() const {
 }
 
 void Board::displayBoardCells() const {
-        int width = 10;
-        for (int x = 0; x < width; x++) {
-                constexpr int length = 10;
-                for (int y = 0; y < length; y++) {
-                        vector<Bug *> cell = boardCells[x + (y * width)];
-                        cout << "(" << x << "," << y << "): ";
+        const int width = 10;
+        const int length = 10;
+        const int cellWidth = 20;
+
+        cout << string(width * (cellWidth + 3) + 1, '-') << endl;
+
+        for (int y = 0; y < length; y++) {
+                cout << "|";
+                for (int x = 0; x < width; x++) {
+                        const vector<Bug *> &cell = boardCells[x + (y * width)];
+
+                        string cellText;
                         if (cell.empty()) {
-                                cout << "empty";
+                                cellText = ".";
                         } else {
-                                for (int i = 0; i < cell.size(); i++) {
-                                        Bug *bug = cell[i];
-                                        bug->displayTypeAndID();
-                                        if (cell.size() > 1 && i < cell.size() - 1) {
-                                                cout << ",";
-                                        }
+                                for (size_t i = 0; i < cell.size(); i++) {
+                                        cellText += cell[i]->displayTypeAndID();
+                                        if (i < cell.size() - 1) cellText += ",";
                                 }
                         }
-                        cout << endl;
+                        printf(" %-*s |", cellWidth, cellText.substr(0, cellWidth).c_str());
                 }
+                cout << endl;
+                cout << string(width * (cellWidth + 3) + 1, '-') << endl;
         }
 }
 
@@ -234,11 +239,13 @@ void Board::fightingLogic() const {
                                                         pairedBug.second->takeDamage(secondDamage);
                                                         if (pairedBug.first->getHealth() < 1) {
                                                                 pairedBug.first->setAlive(false);
-                                                                pairedBug.first->setEatenById(to_string(pairedBug.second->getId()));
+                                                                pairedBug.first->setEatenById(
+                                                                        to_string(pairedBug.second->getId()));
                                                         }
                                                         if (pairedBug.second->getHealth() < 1) {
                                                                 pairedBug.second->setAlive(false);
-                                                                pairedBug.second->setEatenById(to_string(pairedBug.first->getId()));
+                                                                pairedBug.second->setEatenById(
+                                                                        to_string(pairedBug.first->getId()));
                                                         }
                                                 }
                                         }

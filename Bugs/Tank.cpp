@@ -51,9 +51,8 @@ string Tank::displayLifeHistory() {
         return to_string(id) + " Tank Path:" + displayLifeHistoryInitial();
 }
 
-void Tank::displayTypeAndID() {
-        cout << "Tank";
-        Bug::displayTypeAndID();
+string Tank::displayTypeAndID() {
+        return "Tank" + Bug::displayTypeAndID();
 }
 
 void Tank::takeDamage(int damage) {

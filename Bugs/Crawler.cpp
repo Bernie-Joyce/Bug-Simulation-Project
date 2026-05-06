@@ -35,9 +35,8 @@ string Crawler::displayLifeHistory() {
         return to_string(id) + " Crawler Path:" + displayLifeHistoryInitial();
 }
 
-void Crawler::displayTypeAndID() {
-        cout << "Crawler";
-        Bug::displayTypeAndID();
+string Crawler::displayTypeAndID() {
+         return "Crawler" + Bug::displayTypeAndID();
 }
 
 void Crawler::takeDamage(int damage) {
