@@ -42,7 +42,7 @@ public:
 
         [[nodiscard]] bool getFrozen() const;
 
-        virtual void displayTypeAndID();
+        virtual string displayTypeAndID();
 
         virtual string displayLifeHistory() =0;
 

@@ -90,8 +90,8 @@ pair<int, int> Bug::getPosition() const {
         return this->position;
 }
 
-void Bug::displayTypeAndID() {
-        cout << ": " << id;
+string Bug::displayTypeAndID() {
+        return + ": " + id;
 }
 
 

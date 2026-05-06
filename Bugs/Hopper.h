@@ -14,7 +14,7 @@ public:
         Hopper(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health, int hopLength);
         void display() override;
         string displayLifeHistory() override;
-        void displayTypeAndID() override;
+        string displayTypeAndID() override;
         void takeDamage(int damage) override;
 };
 

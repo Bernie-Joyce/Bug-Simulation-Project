@@ -13,7 +13,7 @@ public:
         void display() override;
         Crawler(int id, int x_Coordinate, int y_Coordinate, Direction direction, int health);
         string displayLifeHistory() override;
-        void displayTypeAndID() override;
+        string displayTypeAndID() override;
         void takeDamage(int damage) override;
 };
 
