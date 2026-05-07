@@ -26,6 +26,7 @@ void Board::load(const std::string &fileName) {
                         }
                         fin.close();
                         fillBoardCells();
+                        fillBoardWithFood();
                         cout << "Bugs Loaded: " << alive_bugs.size() << endl;
                 } else {
                         cout << "Error opening file." << endl;
@@ -51,6 +52,13 @@ void Board::fillBoardCells() {
                 pair position = bug->getPosition();
                 vector<Bug *> &cell = boardCells[position.first + (position.second * width)];
                 cell.push_back(bug);
+        }
+}
+
+void Board::fillBoardWithFood() {
+        std::uniform_int_distribution<> foodPicker{0, 99};
+        while (foodIndexes.size() != 10) {
+                foodIndexes.push_back(foodPicker(mt));
         }
 }
 
