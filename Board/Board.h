@@ -55,9 +55,9 @@ public:
 
         void runSimulation();
 
-        void readWinHistory(map<int, int> winTracker);
+        void readWinHistory(map<int, int>& winTracker);
 
-        void writeWinHistory(map<int, int> winTracker);
+        void writeWinHistory(map<int, int>& winTracker);
 
         void delete_board_cells();
 

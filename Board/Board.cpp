@@ -128,8 +128,8 @@ void Board::menu() {
         int commandNumber = 0;
         string bug_file = "bugs.txt";
         string bug_history_file = "bugs_life_history_date_time.out";
-        while (commandNumber != 8) {
-                cout << "Enter a command (1 - 8): ";
+        while (commandNumber != 9) {
+                cout << "Enter a command (1 - 9): ";
                 string command;
                 getline(cin, command);
                 try {
@@ -153,7 +153,9 @@ void Board::menu() {
                                 break;
                         case 7: runSimulation();
                                 break;
-                        case 8: writeLifeHistory(bug_history_file);
+                        case 8: displayWinHistory();
+                                break;
+                        case 9: writeLifeHistory(bug_history_file);
                                 break;
                         default: cout << "Invalid command" << endl;
                 }
@@ -219,7 +221,8 @@ void Board::printMenuOptions() {
         cout << "5. Display Life History of all Bugs (path taken)" << endl;
         cout << "6. Display all Cells listing their Bugs" << endl;
         cout << "7. Run simulation (generates a Tap every second)" << endl;
-        cout << "8. Exit (write Life History of all Bugs to file)" << endl;
+        cout << "8. Display win history of all bugs" << endl;
+        cout << "9. Exit (write Life History of all Bugs to file)" << endl;
 }
 
 void Board::fightingLogic() const {
@@ -286,7 +289,7 @@ void Board::runSimulation() {
         updateWinnersNumberOfWins();
 }
 
-void Board::readWinHistory(map<int, int> winTracker) {
+void Board::readWinHistory(map<int, int>& winTracker) {
         ifstream reader("winners.txt");
 
         if (reader.is_open()) {
@@ -305,7 +308,7 @@ void Board::readWinHistory(map<int, int> winTracker) {
         }
 }
 
-void Board::writeWinHistory(map<int, int> winTracker) {
+void Board::writeWinHistory(map<int, int>& winTracker) {
         ofstream writer("winners.txt");
 
         if (writer.is_open()) {
@@ -325,7 +328,11 @@ void Board::updateWinnersNumberOfWins() {
 }
 
 void Board::displayWinHistory() {
-
+        map<int, int> winTracker;
+        readWinHistory(winTracker);
+        for (auto const& [id, wins] : winTracker) {
+                cout << id << ";" << wins << ";" << std::endl;
+        }
 }
 
 void Board::delete_board_cells() {
