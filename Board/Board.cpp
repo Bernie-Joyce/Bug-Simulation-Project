@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <ostream>
 #include <sstream>
 #include <thread>
@@ -127,8 +128,8 @@ void Board::menu() {
         int commandNumber = 0;
         string bug_file = "bugs.txt";
         string bug_history_file = "bugs_life_history_date_time.out";
-        while (commandNumber != 8) {
-                cout << "Enter a command (1 - 8): ";
+        while (commandNumber != 9) {
+                cout << "Enter a command (1 - 9): ";
                 string command;
                 getline(cin, command);
                 try {
@@ -152,7 +153,9 @@ void Board::menu() {
                                 break;
                         case 7: runSimulation();
                                 break;
-                        case 8: writeLifeHistory(bug_history_file);
+                        case 8: displayWinHistory();
+                                break;
+                        case 9: writeLifeHistory(bug_history_file);
                                 break;
                         default: cout << "Invalid command" << endl;
                 }
@@ -218,7 +221,8 @@ void Board::printMenuOptions() {
         cout << "5. Display Life History of all Bugs (path taken)" << endl;
         cout << "6. Display all Cells listing their Bugs" << endl;
         cout << "7. Run simulation (generates a Tap every second)" << endl;
-        cout << "8. Exit (write Life History of all Bugs to file)" << endl;
+        cout << "8. Display win history of all bugs" << endl;
+        cout << "9. Exit (write Life History of all Bugs to file)" << endl;
 }
 
 void Board::fightingLogic() const {
@@ -280,11 +284,63 @@ void Board::runSimulation() {
                 this_thread::sleep_for(chrono::seconds(1));
         }
 
-        if (alive_bugs.size() == 1) {
-                cout << "Winner: " << alive_bugs[0]->displayTypeAndID() << endl;
+        cout << "Winner: " << alive_bugs[0]->displayTypeAndID() << endl;
+
+        updateWinnersNumberOfWins();
+}
+
+void Board::readWinHistory(map<int, int> &winTracker) {
+        ifstream reader("winners.txt");
+
+        if (reader.is_open()) {
+                string line;
+                while (getline(reader, line)) {
+                        if (line.empty()) continue;
+                        stringstream ss(line);
+                        string idStr, winStr;
+
+                        getline(ss, idStr, ';');
+                        getline(ss, winStr, ';');
+
+                        winTracker[stoi(idStr)] = stoi(winStr);
+                }
+                reader.close();
         }
 }
 
+void Board::writeWinHistory(map<int, int> &winTracker) {
+        ofstream writer("winners.txt");
+
+        if (writer.is_open()) {
+                for (auto const &[id, wins]: winTracker) {
+                        writer << id << ";" << wins << ";" << std::endl;
+                }
+                writer.close();
+        }
+}
+
+void Board::updateWinnersNumberOfWins() {
+        int winnersId = alive_bugs[0]->getId();
+        map<int, int> winTracker;
+        readWinHistory(winTracker);
+        winTracker[winnersId]++;
+        writeWinHistory(winTracker);
+}
+
+void Board::displayWinHistory() {
+        map<int, int> winTracker;
+        readWinHistory(winTracker);
+        cout << "\n===============================" << endl;
+        cout << "   BUG BATTLE LEADERBOARD" << endl;
+        cout << "===============================" << endl;
+        cout << left << setw(12) << "  BUG ID" << " | " << "TOTAL WINS" << endl;
+        cout << string(31, '-') << endl;
+        for (auto const &[id, wins]: winTracker) {
+                cout << "  " << left << setw(10) << id << " | " << wins << endl;
+        }
+        cout << "===============================" << endl;
+        cout << endl;
+}
 
 void Board::delete_board_cells() {
         for (auto &boardCell: boardCells) {

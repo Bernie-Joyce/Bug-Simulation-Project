@@ -4,6 +4,7 @@
 
 #ifndef A_BUGS_LIFE_BOARD_H
 #define A_BUGS_LIFE_BOARD_H
+#include <map>
 #include <vector>
 
 #include "../Bugs/Bug.h"
@@ -18,10 +19,15 @@ class Board {
 
         static void parseLine(const string &line, Bug * &bug);
         void fillBoardCells();
+        void updateWinnersNumberOfWins();
+
+
 
 public:
 
         void fillBoardWithFood();
+
+        void displayWinHistory();
 
         void load(const std::string &fileName);
 
@@ -48,6 +54,10 @@ public:
         void fightingLogic() const;
 
         void runSimulation();
+
+        static void readWinHistory(map<int, int>& winTracker);
+
+        static void writeWinHistory(map<int, int>& winTracker);
 
         void delete_board_cells();
 
