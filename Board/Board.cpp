@@ -1,6 +1,7 @@
 #include "Board.h"
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <ostream>
 #include <sstream>
 #include <thread>
@@ -277,14 +278,55 @@ void Board::runSimulation() {
                 cout << "Round: " << to_string(++counter) << endl;
                 displayBoardCells();
                 std::cout << std::flush;
-                this_thread::sleep_for(chrono::seconds(1));
+              //  this_thread::sleep_for(chrono::seconds(1));
         }
 
-        if (alive_bugs.size() == 1) {
                 cout << "Winner: " << alive_bugs[0]->displayTypeAndID() << endl;
+
+        updateWinnersNumberOfWins();
+}
+
+void Board::readWinHistory(map<int, int> winTracker) {
+        ifstream reader("winners.txt");
+
+        if (reader.is_open()) {
+                string line;
+                while (getline(reader, line)) {
+                        if (line.empty()) continue;
+                        stringstream ss(line);
+                        string idStr, winStr;
+
+                        getline(ss, idStr, ';');
+                        getline(ss, winStr, ';');
+
+                        winTracker[stoi(idStr)] = stoi(winStr);
+                }
+                reader.close();
         }
 }
 
+void Board::writeWinHistory(map<int, int> winTracker) {
+        ofstream writer("winners.txt");
+
+        if (writer.is_open()) {
+                for (auto const& [id, wins] : winTracker) {
+                        writer << id << ";" << wins << ";" << std::endl;
+                }
+                writer.close();
+        }
+}
+
+void Board::updateWinnersNumberOfWins() {
+        int winnersId = alive_bugs[0]->getId();
+        map<int, int> winTracker;
+        readWinHistory(winTracker);
+        winTracker[winnersId]++;
+        writeWinHistory(winTracker);
+}
+
+void Board::displayWinHistory() {
+
+}
 
 void Board::delete_board_cells() {
         for (auto &boardCell: boardCells) {
