@@ -29,21 +29,21 @@ void Tank::display() {
 }
 
 void Tank::move() {
+        std::uniform_int_distribution<> stayStillChance(1, 4);
+        if (stayStillChance(mt) == 1) {
+                path.push_back(position);
+                return;
+        }
+
         while (isWayBlocked()) {
                 direction_ = static_cast<Direction>(directions(mt));
         }
-        if (direction_ == west) {
-                position.first = position.first - 1;
-        }
-        if (direction_ == east) {
-                position.first = position.first + 1;
-        }
-        if (direction_ == south) {
-                position.second = position.second + 1;
-        }
-        if (direction_ == north) {
-                position.second = position.second - 1;
-        }
+
+        if (direction_ == west)  position.first--;
+        if (direction_ == east)  position.first++;
+        if (direction_ == south) position.second++;
+        if (direction_ == north) position.second--;
+
         path.push_back(position);
 }
 
