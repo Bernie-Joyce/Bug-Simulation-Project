@@ -281,15 +281,15 @@ void Board::runSimulation() {
                 cout << "Round: " << to_string(++counter) << endl;
                 displayBoardCells();
                 std::cout << std::flush;
-              //  this_thread::sleep_for(chrono::seconds(1));
+                this_thread::sleep_for(chrono::seconds(1));
         }
 
-                cout << "Winner: " << alive_bugs[0]->displayTypeAndID() << endl;
+        cout << "Winner: " << alive_bugs[0]->displayTypeAndID() << endl;
 
         updateWinnersNumberOfWins();
 }
 
-void Board::readWinHistory(map<int, int>& winTracker) {
+void Board::readWinHistory(map<int, int> &winTracker) {
         ifstream reader("winners.txt");
 
         if (reader.is_open()) {
@@ -308,11 +308,11 @@ void Board::readWinHistory(map<int, int>& winTracker) {
         }
 }
 
-void Board::writeWinHistory(map<int, int>& winTracker) {
+void Board::writeWinHistory(map<int, int> &winTracker) {
         ofstream writer("winners.txt");
 
         if (writer.is_open()) {
-                for (auto const& [id, wins] : winTracker) {
+                for (auto const &[id, wins]: winTracker) {
                         writer << id << ";" << wins << ";" << std::endl;
                 }
                 writer.close();
@@ -330,9 +330,16 @@ void Board::updateWinnersNumberOfWins() {
 void Board::displayWinHistory() {
         map<int, int> winTracker;
         readWinHistory(winTracker);
-        for (auto const& [id, wins] : winTracker) {
-                cout << id << ";" << wins << ";" << std::endl;
+        cout << "\n===============================" << endl;
+        cout << "   BUG BATTLE LEADERBOARD" << endl;
+        cout << "===============================" << endl;
+        cout << left << setw(12) << "  BUG ID" << " | " << "TOTAL WINS" << endl;
+        cout << string(31, '-') << endl;
+        for (auto const &[id, wins]: winTracker) {
+                cout << "  " << left << setw(10) << id << " | " << wins << endl;
         }
+        cout << "===============================" << endl;
+        cout << endl;
 }
 
 void Board::delete_board_cells() {
