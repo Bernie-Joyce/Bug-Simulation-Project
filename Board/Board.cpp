@@ -256,9 +256,11 @@ void Board::fightingLogic() const {
 }
 
 void Board::runSimulation() {
+        int counter = 0;
         while (alive_bugs.size() > 1) {
                 this_thread::sleep_for(chrono::seconds(1));
                 tap();
+                cout << "Round: " << to_string(++counter) << endl;
                 displayBoardCells();
         }
 }
