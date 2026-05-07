@@ -66,6 +66,10 @@ bool Bug::getAlive() const {
         return this->alive;
 }
 
+void Bug::heal() {
+        this->health = 20;
+}
+
 int Bug::getHealth() const {
         return this->health;
 }

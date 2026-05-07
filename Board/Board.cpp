@@ -26,6 +26,7 @@ void Board::load(const std::string &fileName) {
                         }
                         fin.close();
                         fillBoardCells();
+                        fillBoardWithFood();
                         cout << "Bugs Loaded: " << alive_bugs.size() << endl;
                 } else {
                         cout << "Error opening file." << endl;
@@ -51,6 +52,13 @@ void Board::fillBoardCells() {
                 pair position = bug->getPosition();
                 vector<Bug *> &cell = boardCells[position.first + (position.second * width)];
                 cell.push_back(bug);
+        }
+}
+
+void Board::fillBoardWithFood() {
+        std::uniform_int_distribution<> foodPicker{0, 99};
+        while (foodIndexes.size() != 10) {
+                foodIndexes.push_back(foodPicker(mt));
         }
 }
 
@@ -88,9 +96,11 @@ void Board::displayBoardCells() const {
                 for (int x = 0; x < width; x++) {
                         const vector<Bug *> &cell = boardCells[x + (y * width)];
 
+                        bool hasFood = std::ranges::find(foodIndexes, x + (y * width)) != foodIndexes.end();
+
                         string cellText;
                         if (cell.empty()) {
-                                cellText = ".";
+                                cellText = hasFood ? "(FOOD)" : ".";
                         } else {
                                 for (size_t i = 0; i < cell.size(); i++) {
                                         cellText += cell[i]->displayTypeAndID();
@@ -162,25 +172,28 @@ void Board::tap() {
                         if (!bug->getFrozen()) {
                                 bug->move();
                         }
+                        int foodIndex = bug->getPosition().first + (bug->getPosition().second * 10);
+                        if (std::ranges::find(foodIndexes, foodIndex) != foodIndexes.end()) {
+                                bug->heal();
+                                std::erase(foodIndexes, foodIndex);
+                        }
                 }
                 alive_bugs[indexOfFrozenBug]->setNotFrozen();
-                fightingLogic();
-
-                for (Bug *bug: alive_bugs) {
-                        if (!bug->getAlive()) {
-                                dead_bugs.push_back(bug);
-                        }
-                }
-                std::erase_if(alive_bugs, [](Bug const *bug) {
-                        if (!bug->getAlive()) {
-                                return true;
-                        }
-                        return false;
-                });
                 for (auto &cell: boardCells) {
                         cell.clear();
                 }
                 fillBoardCells();
+
+                fightingLogic();
+
+
+                std::erase_if(alive_bugs, [this](Bug *bug) {
+                        if (!bug->getAlive()) {
+                                dead_bugs.push_back(bug);
+                                return true;
+                        }
+                        return false;
+                });
         }
 }
 
@@ -191,10 +204,10 @@ void Board::displayAllBugsLifeHistory() const {
 }
 
 void Board::deleteBugVector() {
-        for (const Bug *bug: alive_bugs) {
+        for (const Bug *bug: all_bugs) {
                 delete bug;
         }
-        alive_bugs.clear();
+        all_bugs.clear();
 }
 
 void Board::printMenuOptions() {
@@ -258,10 +271,17 @@ void Board::fightingLogic() const {
 void Board::runSimulation() {
         int counter = 0;
         while (alive_bugs.size() > 1) {
-                this_thread::sleep_for(chrono::seconds(1));
                 tap();
+                system("clear");
+                cout.flush();
                 cout << "Round: " << to_string(++counter) << endl;
                 displayBoardCells();
+                std::cout << std::flush;
+                this_thread::sleep_for(chrono::seconds(1));
+        }
+
+        if (alive_bugs.size() == 1) {
+                cout << "Winner: " << alive_bugs[0]->displayTypeAndID() << endl;
         }
 }
 

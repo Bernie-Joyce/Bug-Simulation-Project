@@ -38,6 +38,8 @@ public:
 
         [[nodiscard]] bool getAlive() const;
 
+        void heal();
+
         [[nodiscard]] int getHealth() const;
 
         [[nodiscard]] bool getFrozen() const;
